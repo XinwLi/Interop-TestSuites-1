@@ -19,7 +19,7 @@
     <!-- The sutComputerName property specifies the name of the first SUT (system under test). -->
     <Property name="sutComputerName" value="SUT01" />
     <!-- The sut2ComputerName property specifies the name of the second SUT. Keep the value blank if the second SUT is not used. -->
-    <Property name="sut2ComputerName" value="SUT02" />
+    <Property name="sut2ComputerName" value="" />
     <!-- The runWhenConnectingToSUTFailed property specifies whether to continue running the client setup script when the connection to the remote SUT server fails with the following error message : 
 	     The WinRM client cannot process the request because the server name cannot be resolved.  
          The supported values are:
@@ -34,15 +34,15 @@
     <!-- The dnsDomain property specifies the domain name. -->
     <Property name="dnsDomain" value="contoso.com" />
     <!-- The userName property specifies a username which can be used by a client to access the mailbox. The user corresponding to the username should have the required permissions to perform administrative tasks. -->
-    <Property name="userName" value="administrator" />
+    <Property name="userName" value="testuser01" />
     <!-- The password property specifies the password for the user specified in the userName property. The value of the property is case-sensitive. -->
-    <Property name="password" value="Password01!" />
+    <Property name="password" value="9F(9s7*737iPt" />
     <!-- The sutVersion property specifies the version of the first or the second SUT. If the product version that you want is not listed, enter the value corresponding to the closest version of the product.
          The supported values are:
          "1", (Microsoft Exchange Server 2007 Service Pack 3 (SP3));
          "2", (Microsoft Exchange Server 2010 Service Pack 3 (SP3));
          "3", (Microsoft Exchange Server 2013 Service Pack 1 (SP1)). -->
-    <Property Name="sutVersion" Value="2" />
+    <Property Name="sutVersion" Value="5" />
     <!-- The runWhenExchangeVersionDifferent property specifies whether to continue running the client setup script when the Exchange server version on sutComputerName and sut2ComputerName are different.
          The supported values are:
          "1", continue running the client setup script, will use Exchange server version on sutComputerName for common ptfconfig file;
@@ -75,7 +75,7 @@
          "2", ncacn_ip_tcp, to use RPC over TCP as transport, Exchange Server 2013 does not support RPC over TCP; 
          "3", mapi_http, to use MAPIHTTP as transport, MAPIHTTP is supported in Exchange Server 2013 SP1.
          If the value of this property is set to "mapi_http", the value of the useAutodiscover property must be set to true. -->
-    <Property name="transportSeq" value="2"/>
+    <Property name="transportSeq" value="3"/>
     <!-- The rpchUseSsl property specifies whether to use RPC over HTTP with SSL. The test suite only uses this property when the transportSeq property is set as "ncacn_http".
          The supported values are:
          "1", true, to use RPC over HTTP with SSL;
