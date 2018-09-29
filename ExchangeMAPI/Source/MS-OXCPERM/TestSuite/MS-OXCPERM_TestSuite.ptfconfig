@@ -69,7 +69,7 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   </TestLog>
 
   <!-- The attribute "autoGenerate" can be set to true so that the test report is generated automatically after the test run is complete. The location of the Requirement XML file should be specified in the "location" attribute of the RequirementFile element. -->
-  <TestReport autoGenerate="true">
+  <TestReport autoGenerate="false">
     <RequirementFile location=".\MS-OXCPERM_RequirementSpecification.xml"/>
     <LogFile sink="FileLog"/>
     <Report name="MS-OXCPERM_TestResult.html" autoDisplay="false"/>
