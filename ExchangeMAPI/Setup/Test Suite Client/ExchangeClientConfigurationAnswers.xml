@@ -112,9 +112,9 @@
          "2", false, to reuse the existing TCP connection. -->
     <Property name="RpcForceShutdownAssociation" value="1" />
     <!-- The IPv4 property specifies the IPv4 addresses which is used to connect to the Exchange server, if there are multiple IPv4 addresses for the client. -->
-    <Property name="IPv4" value="192.168.0.38" />
+    <Property name="IPv4" value="192.168.0.5" />
     <!-- The IPv6 property specifies the IPv6 addresses which is use to connect to the Exchange server, if there are multiple IPv6 addresses for the client. -->
-    <Property name="IPv6" value="fe80::e977:e5a4:876b:74f8%4" />
+    <Property name="IPv6" value="fe80::b062:8cc7:dcbb:f35e%7" />
     <!-- The runWhenMSOXNSPIAmbiguousNameisEmpty property specifies whether to continue running the client setup script when the values of the properties MSOXNSPIUser1 and MSOXNSPIUser2 in the MS-OXNSPI_TestSuite.deployment.ptfconfig file do not have the same prefix.
          The supported values are:
          "1", continue running the client setup script, which will set an empty value for the property AmbiguousName. In this case, MS-OXNSPI test cases may fail;
