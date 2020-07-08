@@ -484,10 +484,10 @@
             #endregion
             #endregion
 
-            #region Receive the message sent by step 9.
-            bool isMessageReceived = WaitEmailBeDelivered(folderHandle, rowCountBeforeSubmit);
-            Site.Assert.IsTrue(isMessageReceived, "The message should be received.");
-            #endregion
+            //#region Receive the message sent by step 9.
+            //bool isMessageReceived = WaitEmailBeDelivered(folderHandle, rowCountBeforeSubmit);
+            //Site.Assert.IsTrue(isMessageReceived, "The message should be received.");
+            //#endregion
 
             #region Call RopRelease to release all resources.
             this.ReleaseRop(targetMessageHandle);

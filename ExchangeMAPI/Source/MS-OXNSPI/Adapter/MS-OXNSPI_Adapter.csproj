@@ -101,6 +101,7 @@
     <Compile Include="Helper\Structure\Structure.cs" />
     <Compile Include="Helper\Enums.cs" />
     <None Include="SUTControlAdapter\Implementation\GetNumberOfAddressBookObject.ps1" />
+    <Compile Include="SUTControlAdapter\Implementation\MS-OXNSPISUTControlAdapter.cs" />
     <Compile Include="SUTControlAdapter\IMS-OXNSPISUTControlAdapter.cs" />
   </ItemGroup>
   <ItemGroup>

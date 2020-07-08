@@ -71,7 +71,8 @@ namespace Microsoft.Protocols.TestSuites.Common
             string domain,
             string requestURL,
             string transport,
-            string publicFolderMailbox)
+            string publicFolderMailbox,
+            string password)
         {
             HttpStatusCode httpStatusCode = HttpStatusCode.Unused;
             XmlDocument doc = new XmlDocument();
@@ -99,7 +100,7 @@ namespace Microsoft.Protocols.TestSuites.Common
 
             if (transport == "mapi_http")
             {
-                httpStatusCode = SendHttpPostRequest(site, userName, domain, requestXML, requestURL, out responseXML, true);
+                httpStatusCode = SendHttpPostRequest(site, userName, domain, requestXML, requestURL, out responseXML, true, password);
                 site.Assert.AreEqual<HttpStatusCode>(HttpStatusCode.OK, httpStatusCode, "Http status code should be 200 (OK), the error code is {0}", httpStatusCode);
                 doc.LoadXml(responseXML);
 
@@ -117,7 +118,7 @@ namespace Microsoft.Protocols.TestSuites.Common
             }
             else
             {
-                httpStatusCode = SendHttpPostRequest(site, userName, domain, requestXML, requestURL, out responseXML, false);
+                httpStatusCode = SendHttpPostRequest(site, userName, domain, requestXML, requestURL, out responseXML, false, password);
                 site.Assert.AreEqual<HttpStatusCode>(HttpStatusCode.OK, httpStatusCode, "Http status code should be 200 (OK), the error code is {0}", httpStatusCode);
                 doc.LoadXml(responseXML);
 
@@ -154,7 +155,7 @@ namespace Microsoft.Protocols.TestSuites.Common
 
             if (transport == "mapi_http")
             {
-                httpStatusCode = SendHttpPostRequest(site, userName, domain, requestXML, requestURL, out responseXML, true);
+                httpStatusCode = SendHttpPostRequest(site, userName, domain, requestXML, requestURL, out responseXML, true, password);
                 site.Assert.AreEqual<HttpStatusCode>(HttpStatusCode.OK, httpStatusCode, "Http status code should be 200 (OK), the error code is {0}", httpStatusCode);
                 doc.LoadXml(responseXML);
 
@@ -168,7 +169,7 @@ namespace Microsoft.Protocols.TestSuites.Common
             }
             else
             {
-                httpStatusCode = SendHttpPostRequest(site, userName, domain, requestXML, requestURL, out responseXML, false);
+                httpStatusCode = SendHttpPostRequest(site, userName, domain, requestXML, requestURL, out responseXML, false, password);
                 site.Assert.AreEqual<HttpStatusCode>(HttpStatusCode.OK, httpStatusCode, "Http status code should be 200 (OK), the error code is {0}", httpStatusCode);
                 doc.LoadXml(responseXML);
                 elemList = doc.GetElementsByTagName("Protocol");
@@ -199,7 +200,7 @@ namespace Microsoft.Protocols.TestSuites.Common
         /// <param name="responseXml">The response xml</param>
         /// <param name="getMAPIURL">True indicates add headers to get MAPIHTTP url; default value is false</param>
         /// <returns>Return HttpStatusCode</returns>
-        private static HttpStatusCode SendHttpPostRequest(ITestSite site, string userName, string domain, string requestXml, string url, out string responseXml, bool getMAPIURL)
+        private static HttpStatusCode SendHttpPostRequest(ITestSite site, string userName, string domain, string requestXml, string url, out string responseXml, bool getMAPIURL, string password)
         {
             System.Net.ServicePointManager.ServerCertificateValidationCallback =
             new System.Net.Security.RemoteCertificateValidationCallback(Common.ValidateServerCertificate);
@@ -216,7 +217,7 @@ namespace Microsoft.Protocols.TestSuites.Common
                 request.Method = "POST";
                 request.Accept = "*/*";
                 request.ContentType = "text/xml";
-                request.Credentials = CredentialCache.DefaultCredentials;
+                request.Credentials = new NetworkCredential(userName, password, domain); //CredentialCache.DefaultCredentials;
                 request.AllowAutoRedirect = false;
                 request.KeepAlive = false;
 

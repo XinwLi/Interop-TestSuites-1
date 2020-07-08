@@ -938,10 +938,10 @@ namespace Microsoft.Protocols.TestSuites.MS_OXCMSG
                 @"[In Receiving a RopSetReadFlags ROP Request] [ecNullObject (0x000004B9)] The value of the InputHandleIndex field on which this ROP [RopSetReadFlags] was called does not refer to a Folder object.");
               #endregion
 
-            #region Receive the message sent by step 7.
-            bool isMessageReceived = WaitEmailBeDelivered(folderHandle, rowCountBeforeSubmit);
-            Site.Assert.IsTrue(isMessageReceived, "The message should be received.");
-            #endregion
+            //#region Receive the message sent by step 7.
+            //bool isMessageReceived = WaitEmailBeDelivered(folderHandle, rowCountBeforeSubmit);
+            //Site.Assert.IsTrue(isMessageReceived, "The message should be received.");
+            //#endregion
         }
 
         /// <summary>

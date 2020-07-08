@@ -250,7 +250,7 @@ namespace Microsoft.Protocols.TestSuites.Common
                 string requestURL = Common.GetConfigurationPropertyValue("AutoDiscoverUrlFormat", this.site);
                 requestURL = Regex.Replace(requestURL, @"\[ServerName\]", this.originalServerName, RegexOptions.IgnoreCase);
                 string publicFolderMailbox = Common.GetConfigurationPropertyValue("PublicFolderMailbox", this.site);
-                AutoDiscoverProperties autoDiscoverProperties = AutoDiscover.GetAutoDiscoverProperties(this.site, this.originalServerName, this.userName, this.domainName, requestURL, this.MapiContext.TransportSequence.ToLower(), publicFolderMailbox);
+                AutoDiscoverProperties autoDiscoverProperties = AutoDiscover.GetAutoDiscoverProperties(this.site, this.originalServerName, this.userName, this.domainName, requestURL, this.MapiContext.TransportSequence.ToLower(), publicFolderMailbox, password);
 
                 this.privateMailboxServer = autoDiscoverProperties.PrivateMailboxServer;
                 this.privateMailboxProxyServer = autoDiscoverProperties.PrivateMailboxProxy;
@@ -363,6 +363,7 @@ namespace Microsoft.Protocols.TestSuites.Common
         /// <param name="rgbRopOut">The response payload bytes.</param>
         /// <param name="pcbOut">The maximum size of the rgbOut buffer to place Response in.</param>
         /// <param name="mailBoxUserName">Autodiscover find the mailbox according to this username.</param>
+        /// <param name="mailBoxUserPassword">The password of mailBoxUserName.</param>
         /// <returns>0 indicates success, other values indicate failure. </returns>
         public uint RopCall(
             List<ISerializable> requestROPs,
@@ -371,7 +372,8 @@ namespace Microsoft.Protocols.TestSuites.Common
             ref List<List<uint>> responseSOHTable,
             ref byte[] rgbRopOut,
             uint pcbOut,
-            string mailBoxUserName = null)
+            string mailBoxUserName = null,
+            string mailBoxUserPassword = "")
         {
             // Log the rop requests
             if (requestROPs != null)
@@ -469,16 +471,17 @@ namespace Microsoft.Protocols.TestSuites.Common
                         if (mailBoxUserName == null)
                         {
                             mailBoxUserName = Common.GetConfigurationPropertyValue("AdminUserName", this.site);
+                            mailBoxUserPassword = Common.GetConfigurationPropertyValue("AdminUserPassword", this.site);
+
                             if (mailBoxUserName == null || mailBoxUserName == "")
                             {
                                 this.site.Assert.Fail(@"There must be ""AdminUserName"" configure item in the ptfconfig file.");
                             }
                         }
-
                         string requestURL = Common.GetConfigurationPropertyValue("AutoDiscoverUrlFormat", this.site);                        
                         requestURL = Regex.Replace(requestURL, @"\[ServerName\]", this.originalServerName, RegexOptions.IgnoreCase);
                         string publicFolderMailbox = Common.GetConfigurationPropertyValue("PublicFolderMailbox", this.site);
-                        AutoDiscoverProperties autoDiscoverProperties = AutoDiscover.GetAutoDiscoverProperties(this.site, this.originalServerName, mailBoxUserName, this.domainName, requestURL, this.MapiContext.TransportSequence.ToLower(), publicFolderMailbox);
+                        AutoDiscoverProperties autoDiscoverProperties = AutoDiscover.GetAutoDiscoverProperties(this.site, this.originalServerName, mailBoxUserName, this.domainName, requestURL, this.MapiContext.TransportSequence.ToLower(), publicFolderMailbox, mailBoxUserPassword);
 
                         this.privateMailboxServer = autoDiscoverProperties.PrivateMailboxServer;
                         this.privateMailboxProxyServer = autoDiscoverProperties.PrivateMailboxProxy;
